@@ -1,9 +1,8 @@
 <?php
-namespace dao;
-include ('postulantedao.php');
 
-
-
+include '../dto/postulante.php';
+include 'postulantedao.php';
+include '../sql/ConexionPDO.php';
 /**
  * Description of PostulanteDAOImplementado
  *
@@ -54,51 +53,30 @@ class PostulanteDAOImplementado implements PostulanteDAO  {
         }               
     }
 
-    public function agregarPostulante(\dto\Postulante $nuevoPostulante){
-        $conexion = new ConexionPDO();
+    public function agregarPostulante(Postulante $nuevoPostulante){       
              
         try {                  
-            
+            $conexion = new ConexionPDO();
             $n_rut = trim($nuevoPostulante->getRut());                      
             $n_nombre = trim($nuevoPostulante->getNombre());
             $n_aPaterno = trim($nuevoPostulante->getApellido_paterno());
-            $n_aMaterno = trim($nuevoPostulante->getApellido_materno());
-            $n_nacimiento = $nuevoPostulante->getF_nacimiento();
-            $n_sexo = $nuevoPostulante->getSexo();
-            $n_fono = $nuevoPostulante->getFono();
-            $n_nivel_ed = $nuevoPostulante->getNivel_educacional();
-            $n_mail = $nuevoPostulante->getE_mail();
-            $n_direccion = $nuevoPostulante->getDireccion();
-            $n_comuna = $nuevoPostulante->getComuna();
-            $n_exp_laboral = $nuevoPostulante->getExperiencia_laboral();            
+            $n_aMaterno = trim($nuevoPostulante->getApellido_materno());           
             $n_pass= trim($nuevoPostulante->getPass());
             $query = "INSERT INTO postulante VALUES("
                     . "'$n_rut',"
+                    . "'$n_nombre',"
                     . "'$n_aPaterno',"
-                    . "'$n_aMaterno',"
-                    . "'$n_nacimiento',"
-                    . "'$n_sexo',"
-                    . "'$n_fono',"
-                    . "'$n_nivel_ed',"
-                    . "'$n_mail',"
-                    . "'$n_direccion',"
-                    . "'$n_comuna',"
-                    . "'$n_exp_laboral',"
-                    . "'$n_pass"
+                    . "'$n_aMaterno',"                    
+                    . "'$n_pass'"
                     . ")";
-            $statement = $conexion->query($query);                        
-            if($statement != false){
-                $row = $statement->fetchObject();            
-                return array(true, $row);
-            }else{
-                return false;
-            }
-            $resultado = $statement->fetch();                       
-        } catch (Exception $exc) {            
-            echo $exc->getMessage();
-            $resultado = false;
-            return false;
+            $resultado = $conexion->query($query);                        
             
+        } catch (Exception $exc) {                 
+            
+            echo $exc->getMessage();
+            $resultado = false;            
+        } finally {
+            return $resultado;
         }
     }
     
@@ -106,12 +84,12 @@ class PostulanteDAOImplementado implements PostulanteDAO  {
     public function ingresarPostulante($id_postulante, $pass) {
         $conexion = new ConexionPDO();
              
-        try {                  
+        try {            
             
             $n_id_ejecutivo = trim($id_postulante);           
             $n_pass = trim($pass);            
             $query = "SELECT * FROM postulante WHERE rut = '$n_id_ejecutivo' and contraseña='$n_pass' ";
-            $statement = $conexion->query($query);                        
+            $statement = $conexion->query($query);            
             if($statement != false){
                 $row = $statement->fetchObject();            
                 return array(true, $row);
@@ -127,7 +105,7 @@ class PostulanteDAOImplementado implements PostulanteDAO  {
         }
     }
 
-    public function modificarPostulante(\dto\Postulante $postulante) {
+    public function modificarPostulante(Postulante $postulante) {
         $conexion = new ConexionPDO();             
         try {                  
             

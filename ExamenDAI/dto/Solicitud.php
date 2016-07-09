@@ -6,8 +6,6 @@
  * and open the template in the editor.
  */
 
-namespace dto;
-
 /**
  * Description of Postulacion
  *

@@ -1,6 +1,7 @@
 <?php
 
-namespace dao;
+include '../dto/ejecutivo.php';
+include '../sql/ConexionPDO.php';
 
 class SolicitudDaoImplementado implements SolicitudDAO {
     public function buscarPostulacion($id_postulacion) {

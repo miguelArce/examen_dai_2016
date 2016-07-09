@@ -4,7 +4,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
     
     session_start();    
     include ('../dao/postulantedaoimplementado.php'); 
-    $postulante = new \dao\PostulanteDAOImplementado();   
+    $postulante = new PostulanteDAOImplementado();   
     
     list($check, $data) = $postulante->ingresarPostulante($_POST['rut'], $_POST['pass']);
     
@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
         $_SESSION['tipo_usuario'] = 'postulante';
         
         //TO_DO
-        header ('Location: formulario');
+        header ('Location: ../paginas/formulario_postulacion.php');
         
     }else{        
         $errores = $data;

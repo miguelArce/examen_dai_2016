@@ -3,7 +3,6 @@
 include '../dto/ejecutivo.php';
 include '../sql/ConexionPDO.php';
 
-namespace dao;
 
 class EjecutivoDaoImplementado implements EjecutivoDAO {
     public function buscarEjecutivo($id_ejecutivo) {        

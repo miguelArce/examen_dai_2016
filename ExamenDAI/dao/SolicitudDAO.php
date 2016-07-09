@@ -1,6 +1,5 @@
 <?php
 
-namespace dao;
 
     interface SolicitudDAO {
     function ingresarPostulacion(\dto\Solicitud $postulacion);

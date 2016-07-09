@@ -6,7 +6,6 @@
  * and open the template in the editor.
  */
 
-namespace dto;
 
 /**
  * Description of Postulante
@@ -21,7 +20,7 @@ class Postulante {
     private $pass;
 
     
-    function __construct($rut, $nombre, $apellido_paterno, $apellido_materno, $f_nacimiento, $sexo, $fono, $e_mail, $direccion, $comuna, $nivel_educacional, $experiencia_laboral, $pass) {
+    function __construct($rut="", $nombre="", $apellido_paterno="", $apellido_materno="",$pass="") {
         $this->rut = $rut;
         $this->nombre = $nombre;
         $this->apellido_paterno = $apellido_paterno;

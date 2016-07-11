@@ -3,28 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp/www/ExamenDAI/dto/Solicitud.php</file>
+            <file>file:/C:/wamp/www/ExamenDAI/dao/SolicitudDAO.php</file>
+            <file>file:/C:/wamp/www/ExamenDAI/paginas/estado_postulacion.php</file>
+            <file>file:/C:/wamp/www/ExamenDAI/paginas/formulario_postulacion.php</file>
             <file>file:/C:/wamp/www/ExamenDAI/paginas/login.php</file>
             <file>file:/C:/wamp/www/ExamenDAI/handlers/proc_login_postulante.php</file>
-            <file>file:/C:/wamp/www/ExamenDAI/dto/Postulante.php</file>
-            <file>file:/C:/wamp/www/ExamenDAI/dao/EjecutivoDaoImplementado.php</file>
-            <file>file:/C:/wamp/www/ExamenDAI/paginas/listado_solicitudes.php</file>
-            <file>file:/C:/wamp/www/ExamenDAI/estado_postulación.php</file>
-            <file>file:/C:/wamp/www/ExamenDAI/paginas/includes/header.php</file>
-            <file>file:/C:/wamp/www/ExamenDAI/sql/ConexionPDO.php</file>
-            <file>file:/C:/wamp/www/ExamenDAI/paginas/registrar_usuario.php</file>
-            <file>file:/C:/wamp/www/ExamenDAI/paginas/modificacion-postulacion.php</file>
-            <file>file:/C:/wamp/www/ExamenDAI/dao/SolicitudDaoImplementado.php</file>
-            <file>file:/C:/wamp/www/ExamenDAI/dto/Ejecutivo.php</file>
-            <file>file:/C:/wamp/www/ExamenDAI/handlers/proc_login_ejecutivo.php</file>
             <file>file:/C:/wamp/www/ExamenDAI/dao/PostulanteDAOImplementado.php</file>
-            <file>file:/C:/wamp/www/ExamenDAI/paginas/ficha-postulante.php</file>
-            <file>file:/C:/wamp/www/ExamenDAI/paginas/login_ejecutivo.php</file>
-            <file>file:/C:/wamp/www/ExamenDAI/handlers/registrar_sol.php</file>
-            <file>file:/C:/wamp/www/ExamenDAI/handlers/registro_postulante.php</file>
-            <file>file:/C:/wamp/www/ExamenDAI/paginas/formulario-postulacion.php</file>
-            <file>file:/C:/wamp/www/ExamenDAI/paginas/buscador_solicitudes.php</file>
-            <file>file:/C:/wamp/www/ExamenDAI/dao/EjecutivoDAO.php</file>
+            <file>file:/C:/wamp/www/ExamenDAI/paginas/includes/header.php</file>
+            <file>file:/C:/wamp/www/ExamenDAI/paginas/registrar_usuario.php</file>
+            <file>file:/C:/wamp/www/ExamenDAI/paginas/logout.php</file>
+            <file>file:/C:/wamp/www/ExamenDAI/dao/SolicitudDaoImplementado.php</file>
         </group>
     </open-files>
 </project-private>

@@ -16,7 +16,7 @@
       <strong>Bienvenido</strong>, ingrese sus datos.</h1>
       <form method="post" action="../handlers/proc_login_postulante.php">
         <input type="text" name="rut" placeholder="Rut" required="required" class="input-txt" />
-          <input type="password" name="password" placeholder="Password" required="required" class="input-txt" />
+          <input type="password" name="pass" placeholder="Password" required="required" class="input-txt" />
           <div class="login-footer">
              <a href="login_ejecutivo.php" class="lnk">
               <span class="icon icon--min">ಠ╭╮ಠ</span> 

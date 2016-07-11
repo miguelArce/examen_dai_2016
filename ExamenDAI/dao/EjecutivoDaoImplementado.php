@@ -3,7 +3,6 @@
 include '../dto/ejecutivo.php';
 include '../sql/ConexionPDO.php';
 
-namespace dao;
 
 class EjecutivoDaoImplementado implements EjecutivoDAO {
     public function buscarEjecutivo($id_ejecutivo) {        
@@ -47,7 +46,7 @@ class EjecutivoDaoImplementado implements EjecutivoDAO {
         }                
     }
 
-    public function ingresarEjecutivo(\dto\Ejecutivo $ejecutivo) {
+    public function ingresarEjecutivo(Ejecutivo $ejecutivo) {
         $conexion = new ConexionPDO();             
         try {                  
             
@@ -74,7 +73,7 @@ class EjecutivoDaoImplementado implements EjecutivoDAO {
         }  
     }
 
-    public function modificarEjecutivo(\dto\Ejecutivo $ejecutivo) {
+    public function modificarEjecutivo(Ejecutivo $ejecutivo) {
         $conexion = new ConexionPDO();             
         try {                  
             

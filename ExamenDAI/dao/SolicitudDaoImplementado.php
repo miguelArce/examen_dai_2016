@@ -1,6 +1,7 @@
 <?php
 
-namespace dao;
+include '../dto/ejecutivo.php';
+include '../sql/ConexionPDO.php';
 
 class SolicitudDaoImplementado implements SolicitudDAO {
     public function buscarPostulacion($id_postulacion) {
@@ -47,18 +48,53 @@ class SolicitudDaoImplementado implements SolicitudDAO {
         }
     }
 
+    
+    //TO_DO!!!
     public function listarPostulacionesPorRangoFecha($fecha_desde, $fecha_hasta) {
-        
+        $conexion = new ConexionPDO();             
+        $resultado = array();
+         try {
+            
+            $query = "SELECT rutPostulante, estado from solicitud "
+                    . "WHERE (fechaIngreso BETWEEN :fechaDesde AND :fechaHasta";
+            $statement = $conexion->prepare($query);            
+            $statement->bindParam(':fechaDesde', $);
+            $statement->bindParam(':fechaHasta', $);
+            $statement->execute();
+            $res = $statement->fetch(PDO::FETCH_ASSOC);
+            foreach ($res as $value) {
+                
+            }
+        } catch (Exception $exc) {            
+            echo $exc->getMessage();
+            return "no encontrado";
+        }
     }
 
     public function listarPostulacionesPorRutPostulante($rut_postulante) {
-        
+        $conexion = new ConexionPDO();             
+        $resultado = array();
+         try {
+            $n_rut = trimI($rut_postulante);
+            $query = "SELECT rutPostulante, estado from solicitud "
+                    . "WHERE rutPostulante= :rut";
+            $statement = $conexion->prepare($query);            
+            $statement->bindParam(':rut', $$n_rut);            
+            $statement->execute();
+            $res = $statement->fetch(PDO::FETCH_ASSOC);
+            foreach ($res as $value) {
+                
+            }
+        } catch (Exception $exc) {            
+            echo $exc->getMessage();
+            return "no encontrado";
+        }
     }
 
-    public function modificarPostulacion(\dto\Solicitud $postulacion) {
+    public function modificarPostulacion(Solicitud $postulacion) {
         $conexion = new ConexionPDO();             
         try {                  
-            $nuevoAutor = new \dto\Solicitud();
+            $nuevoAutor = new Solicitud();
             $rut_postulante = $nuevoAutor->getRut();
             $nombre = $nuevoAutor->getNombre();
             $aPaterno = $nuevoAutor->getApellido_paterno();
@@ -94,22 +130,18 @@ class SolicitudDaoImplementado implements SolicitudDAO {
         $conexion = new ConexionPDO();             
          try {                  
             
-            $query = "SELECT n_estado from estado est, historial_solicitud hist "
-                    . "where hist.idSolicitud ='$id_solicitud' AND"
-                    . "est.idEstado = hist.idEstado LIMIT 1";
-            $statement = $conexion->query($query);            
-            $res = $statement->execute();                         
-            $res->fetch_style(PDO::FETCH_ASSOC);
-            $array = $res->fetch();
-            return $array;
+            $query = "SELECT estado from solicitud WHERE idSolicitud =:id";
+            $statement = $conexion->prepare($query);            
+            $statement->bindParam(':id', $id_solicitud);                     
+            $statement->execute();
+            $res = $statement->fetch(PDO::FETCH_ASSOC);
+            if($statement->rowCount()>0){
+                return $res['estado'];
+            }
         } catch (Exception $exc) {            
             echo $exc->getMessage();
-            $resultado = false;
-        } finally {
-            return $resultado;
-        }
+            return "no encontrado";
         
     }
 
-//put your code here
 }

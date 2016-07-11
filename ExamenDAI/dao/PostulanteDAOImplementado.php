@@ -1,9 +1,8 @@
 <?php
-namespace dao;
-include ('postulantedao.php');
 
-
-
+include '../dto/postulante.php';
+include 'postulantedao.php';
+include '../sql/ConexionPDO.php';
 /**
  * Description of PostulanteDAOImplementado
  *
@@ -54,51 +53,33 @@ class PostulanteDAOImplementado implements PostulanteDAO  {
         }               
     }
 
-    public function agregarPostulante(\dto\Postulante $nuevoPostulante){
-        $conexion = new ConexionPDO();
+    public function agregarPostulante(Postulante $nuevoPostulante){       
              
         try {                  
-            
-            $n_rut = trim($nuevoPostulante->getRut());                      
+            $conexion = new ConexionPDO();
+            $n_rut = trim($nuevoPostulante->getRut());
+            if (!$this->validarRut($n_rut)){
+                return false;
+                }            
             $n_nombre = trim($nuevoPostulante->getNombre());
             $n_aPaterno = trim($nuevoPostulante->getApellido_paterno());
-            $n_aMaterno = trim($nuevoPostulante->getApellido_materno());
-            $n_nacimiento = $nuevoPostulante->getF_nacimiento();
-            $n_sexo = $nuevoPostulante->getSexo();
-            $n_fono = $nuevoPostulante->getFono();
-            $n_nivel_ed = $nuevoPostulante->getNivel_educacional();
-            $n_mail = $nuevoPostulante->getE_mail();
-            $n_direccion = $nuevoPostulante->getDireccion();
-            $n_comuna = $nuevoPostulante->getComuna();
-            $n_exp_laboral = $nuevoPostulante->getExperiencia_laboral();            
+            $n_aMaterno = trim($nuevoPostulante->getApellido_materno());           
+            
             $n_pass= trim($nuevoPostulante->getPass());
             $query = "INSERT INTO postulante VALUES("
                     . "'$n_rut',"
+                    . "'$n_nombre',"
                     . "'$n_aPaterno',"
-                    . "'$n_aMaterno',"
-                    . "'$n_nacimiento',"
-                    . "'$n_sexo',"
-                    . "'$n_fono',"
-                    . "'$n_nivel_ed',"
-                    . "'$n_mail',"
-                    . "'$n_direccion',"
-                    . "'$n_comuna',"
-                    . "'$n_exp_laboral',"
-                    . "'$n_pass"
+                    . "'$n_aMaterno',"                    
+                    . "'$n_pass'"
                     . ")";
-            $statement = $conexion->query($query);                        
-            if($statement != false){
-                $row = $statement->fetchObject();            
-                return array(true, $row);
-            }else{
-                return false;
-            }
-            $resultado = $statement->fetch();                       
-        } catch (Exception $exc) {            
-            echo $exc->getMessage();
-            $resultado = false;
-            return false;
+            $resultado = $conexion->query($query);                        
             
+        } catch (Exception $exc) {           
+            echo "Error en agregarPostulante: ".$exc->getMessage();
+            $resultado = false;            
+        } finally {
+            return $resultado;
         }
     }
     
@@ -106,44 +87,52 @@ class PostulanteDAOImplementado implements PostulanteDAO  {
     public function ingresarPostulante($id_postulante, $pass) {
         $conexion = new ConexionPDO();
              
-        try {                  
+        try {            
             
             $n_id_ejecutivo = trim($id_postulante);           
-            $n_pass = trim($pass);            
-            $query = "SELECT * FROM postulante WHERE rut = '$n_id_ejecutivo' and contraseña='$n_pass' ";
-            $statement = $conexion->query($query);                        
-            if($statement != false){
-                $row = $statement->fetchObject();            
-                return array(true, $row);
+            $n_pass = trim($pass);     
+            
+            $query = "SELECT rut, nombre FROM postulante WHERE rut = :rut and contraseña=:pass ";
+            $statement = $conexion->prepare($query);
+            $statement->bindParam(':rut', $n_id_ejecutivo);
+            $statement->bindParam(':pass', $n_pass);
+            $statement->execute();
+            $resultados = $statement->fetch(PDO::FETCH_ASSOC);
+            
+            if($statement->rowCount()>0){
+                return array(true, $resultados) ;
             }else{
                 return false;
             }
-            $resultado = $statement->fetch();                       
-        } catch (Exception $exc) {            
-            echo $exc->getMessage();
-            $resultado = false;
-            return false;
+        
             
+        } catch (Exception $exc) {            
+            echo $exc->getMessage(); //mensaje para debugging
+            return false;
         }
     }
 
-    public function modificarPostulante(\dto\Postulante $postulante) {
+    public function modificarPostulante(Postulante $postulante) {
         $conexion = new ConexionPDO();             
-        try {                  
-            
-            $apaterno_ejecutivo = trim($postulante->getApellido_paterno());            
-            $amaterno_ejecutivo = trim($postulante->getApellido_materno());            
-            $nombre_ejecutivo = trim($postulante->getNombre());            
-            $id_ejecutivo = $this->validarRut(trim($postulante->getRut()));        
+        try {                              
+            $a_paterno = trim($postulante->getApellido_paterno());            
+            $a_materno = trim($postulante->getApellido_materno());            
+            $nombre = trim($postulante->getNombre());            
+            $rut = $this->validarRut(trim($postulante->getRut()));        
             $pass = trim($postulante->getPass());
             
-            $query = "UPDATE postulante SET (?),(?),(?),(?)) where rut = (?)";
+            $query = "UPDATE postulante "
+                    . "SET contraseña = (?), "
+                    . "nombre = (?), "
+                    . "apellidoPaterno = (?), "
+                    . "apellidoMaterno = (?) WHERE "
+                    . "rut = (?)";
             $statement = $conexion->prepare($query);
             $statement->bindValue(1, $pass);
-            $statement->bindValue(2, $nombre_ejecutivo);
-            $statement->bindValue(3, $apaterno_ejecutivo);
-            $statement->bindValue(4, $amaterno_ejecutivo);
-            $statement->bindValue(5, $id_ejecutivo);
+            $statement->bindValue(2, $nombre);
+            $statement->bindValue(3, $a_paterno);
+            $statement->bindValue(4, $a_materno);
+            $statement->bindValue(5, $rut);
             $resultado = $statement->execute();             
                        
         } catch (Exception $exc) {            

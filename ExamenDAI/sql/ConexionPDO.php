@@ -13,14 +13,22 @@
  */
 class ConexionPDO extends PDO {
     //TODO: Setear parámetros de conexión a base de datos MySQL
-    var $tns= "bd_examen" ;
-    var $user = "root";
-    var $pass = "";
+    private $host = "localhost";
+    private $charset = "utf8";
+    private $tns= "bd_examen" ;
+    private $user = "root";
+    private $pass = "";
     
     public function __construct(array $options = null) {
         try
         {
-            parent::__construct("oci:dbname".$this->tns, $this->user, $this->pass, $options);
+            parent::__construct("mysql:"
+                    . "host=$this->host;"
+                    . "dbname=$this->tns;"
+                    . "charset=$this->charset", 
+                    $this->user, 
+                    $this->pass);
+            $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } 
         catch (PDOException $exc){
             echo "conexion fallida: ".$exc->getMessage();

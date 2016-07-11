@@ -6,15 +6,13 @@
  * and open the template in the editor.
  */
 
-namespace dao;
-
 /**
  *
  * @author sebpa
  */
 interface PostulanteDAO {
-    function ingresarPostulante(\dto\Postulante $postulante);
-    function modificarPostulante(\dto\Postulante $postulante);
+    function ingresarPostulante($postulante, $pass);
+    function modificarPostulante(Postulante $postulante);
     function eliminarPostulante($id_postulante);
     function buscarPostulante($id_postulante);
     function validarRut($rut_ingresado);

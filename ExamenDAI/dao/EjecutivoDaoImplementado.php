@@ -46,7 +46,7 @@ class EjecutivoDaoImplementado implements EjecutivoDAO {
         }                
     }
 
-    public function ingresarEjecutivo(\dto\Ejecutivo $ejecutivo) {
+    public function ingresarEjecutivo(Ejecutivo $ejecutivo) {
         $conexion = new ConexionPDO();             
         try {                  
             
@@ -73,7 +73,7 @@ class EjecutivoDaoImplementado implements EjecutivoDAO {
         }  
     }
 
-    public function modificarEjecutivo(\dto\Ejecutivo $ejecutivo) {
+    public function modificarEjecutivo(Ejecutivo $ejecutivo) {
         $conexion = new ConexionPDO();             
         try {                  
             

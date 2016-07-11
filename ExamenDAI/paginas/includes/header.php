@@ -1,8 +1,9 @@
 <?php
 session_start();
-if(!isset($_SESSION['tipo_sesion'])){    
+if(!isset($_SESSION['tipo_usuario'])){    
     header('location: login.php');
 }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,16 +20,16 @@ if(!isset($_SESSION['tipo_sesion'])){
  
 			<nav>
 				<ul>					
-					<li><a href="formulario_postulante">Postular</a></li>	
-					<li><a href="">Consultar por postulación</a></li>
+					<li><a href="formulario_postulacion.php">Postular</a></li>	
+					<li><a href="estado_postulacion.php">Consultar estado postulación</a></li>
 				<li>
                         <?php
-                        if($_SESSION['tipo_sesion']==='ejecutivo'){
+                        if($_SESSION['tipo_usuario']==='ejecutivo'){
                             echo "<a href='buscador_solicitudes.php'>Buscar postulacion </a>";                                                                                                    
                         }
                         ?>
                                 </li>    
-                                <li><?php echo $_SESSION['nombre']; ?><a href='logout.php'> Cerrar sesión </a></li>                                                                
+                                <li><a href='logout.php'><?php echo $_SESSION['nombre']; ?>, Cerrar sesión </a></li>                                                                
 				</ul>
 			</nav>
         </header>

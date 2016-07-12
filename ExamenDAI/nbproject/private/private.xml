@@ -5,13 +5,12 @@
         <group>
             <file>file:/C:/wamp/www/ExamenDAI/dao/SolicitudDAO.php</file>
             <file>file:/C:/wamp/www/ExamenDAI/paginas/estado_postulacion.php</file>
+            <file>file:/C:/wamp/www/ExamenDAI/dto/Solicitud.php</file>
             <file>file:/C:/wamp/www/ExamenDAI/paginas/formulario_postulacion.php</file>
-            <file>file:/C:/wamp/www/ExamenDAI/paginas/login.php</file>
             <file>file:/C:/wamp/www/ExamenDAI/handlers/proc_login_postulante.php</file>
             <file>file:/C:/wamp/www/ExamenDAI/dao/PostulanteDAOImplementado.php</file>
-            <file>file:/C:/wamp/www/ExamenDAI/paginas/includes/header.php</file>
-            <file>file:/C:/wamp/www/ExamenDAI/paginas/registrar_usuario.php</file>
-            <file>file:/C:/wamp/www/ExamenDAI/paginas/logout.php</file>
+            <file>file:/C:/wamp/www/ExamenDAI/dao/PostulanteDAO.php</file>
+            <file>file:/C:/wamp/www/ExamenDAI/paginas/listado_solicitudes.php</file>
             <file>file:/C:/wamp/www/ExamenDAI/dao/SolicitudDaoImplementado.php</file>
         </group>
     </open-files>

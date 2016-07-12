@@ -11,7 +11,7 @@
   <body>
 
   <div class="container">
-  <div class="login">
+  <div id="login_usuario" class="login">
   	<h1 class="login-heading">
       <strong>Bienvenido</strong>, ingrese sus datos.</h1>
       <form method="post" action="../handlers/proc_login_postulante.php">

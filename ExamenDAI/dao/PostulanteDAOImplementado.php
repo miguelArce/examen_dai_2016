@@ -3,11 +3,7 @@
 include '../dto/postulante.php';
 include 'postulantedao.php';
 include '../sql/ConexionPDO.php';
-/**
- * Description of PostulanteDAOImplementado
- *
- * @author sebpa
- */
+
 class PostulanteDAOImplementado implements PostulanteDAO  {
     
     public function validarRut($rut_ingresado) {        

@@ -1,9 +1,14 @@
-<?php  
-include('includes/header.php');    
-    echo "<h2>Listado de postulaciones</h2><br>";
-    //TO DO: esto debe ser separado en dos acciones distintas
-    $instancia = new SolicitudDaoImplementado();    
-    $resultado = $instancia->listarPostulaciones();
+<?php
+
+if ($_SERVER['REQUEST_METHOD']=='POST'){
+    
+    session_start();    
+    include ('../dao/SolicitudDaoImplementado.php'); 
+    $rut = $_POST['rut'];
+    $solicitud = new SolicitudDaoImplementado();
+    
+    $resultado = $solicitud->listarPostulacionesPorRutPostulante($rut);
+    
     if(!empty($resultado)){
         echo "<table border='1'>\n";
         echo  "<tr><td>Rut</td>"
@@ -22,6 +27,6 @@ include('includes/header.php');
         }
         echo "</table>\n";
     }else{
-        echo "<p>no hay proyectos por asignar</p>";
+        echo "<p>no se han encontrado solicitudes</p>";
     }
-include('includes/footer.php');
+}

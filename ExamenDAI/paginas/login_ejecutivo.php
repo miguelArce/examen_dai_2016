@@ -14,8 +14,8 @@
 
   <body>
 
-    <div class="container">
-  <div class="login">
+    <div id="login_ejecutivo" class="container">
+        <div class="login">
   	<h1 class="login-heading">
       <strong>Bienvenido</strong>, ingrese sus datos.</h1>
       <form method="post" action="../handlers/proc_login_ejecutivo.php">

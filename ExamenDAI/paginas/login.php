@@ -4,12 +4,11 @@
 <html >
   <head>
     <meta charset="UTF-8">
-    <title>Ingreso</title><link rel="stylesheet" href="css/reset.css">
+    <title>Ingreso</title>
+    <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
   </head>
-
   <body>
-
   <div class="container">
   <div id="login_usuario" class="login">
   	<h1 class="login-heading">

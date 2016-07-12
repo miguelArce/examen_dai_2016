@@ -3,7 +3,7 @@
 include '../dto/ejecutivo.php';
 include '../sql/ConexionPDO.php';
 
-class SolicitudDaoImplementado implements SolicitudDAO {
+class SolicitudDaoImplementado{
 
     public function buscarPostulacion($id_postulacion) {
         $conexion = new ConexionPDO();
@@ -90,6 +90,19 @@ class SolicitudDaoImplementado implements SolicitudDAO {
             echo $exc->getMessage();
         }
        
+    }
+    
+    public function listarPostulaciones() {
+        $conexion = new ConexionPDO();        
+        try {
+            $query = "SELECT rutPostulante, estado from solicitud ";
+            $statement = $conexion->prepare($query);            
+            $statement->execute();
+            $res = $statement->fetch(PDO::FETCH_ASSOC);
+            return $res;
+        } catch (Exception $exc) {
+            echo $exc->getMessage();
+        }
     }
 
     //TO_DO!!!

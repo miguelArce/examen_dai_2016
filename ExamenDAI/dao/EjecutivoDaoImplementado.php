@@ -4,10 +4,9 @@ include '../dto/ejecutivo.php';
 include '../sql/ConexionPDO.php';
 
 
-class EjecutivoDaoImplementado implements EjecutivoDAO {
+class EjecutivoDaoImplementado {
     public function buscarEjecutivo($id_ejecutivo) {        
-        $conexion = new ConexionPDO();
-             
+        $conexion = new ConexionPDO();             
         try {                  
             
             $n_id_ejecutivo = trim($id_ejecutivo);            
@@ -15,20 +14,15 @@ class EjecutivoDaoImplementado implements EjecutivoDAO {
             $statement = $conexion->prepare($query);
             $statement->bindValue(1, $n_id_ejecutivo);
             $statement->execute();
-            $resultado = true;
-                       
+            $resultado = $statement->fetch(PDO::FETCH_ASSOC);
+            return $resultado;
         } catch (Exception $exc) {            
             echo $exc->getMessage();
-            $resultado = false;
-        } finally {
-            return $resultado;
-        }                
-        
+        }
     }
 
     public function eliminarEjecutivo($id_ejecutivo) {
-        $conexion = new ConexionPDO();
-             
+        $conexion = new ConexionPDO();             
         try {                  
             
             $n_id_ejecutivo = trim($id_ejecutivo);            
@@ -36,17 +30,17 @@ class EjecutivoDaoImplementado implements EjecutivoDAO {
             $statement = $conexion->prepare($query);
             $statement->bindValue(1, $n_id_ejecutivo);
             $statement->execute();
-            $resultado = true;
-                       
+            if($statement->rowCount()>0){
+                return true;
+            }else{
+                return false;
+            }                       
         } catch (Exception $exc) {            
             echo $exc->getMessage();
-            $resultado = false;
-        } finally {
-            return $resultado;
         }                
     }
 
-    public function ingresarEjecutivo(Ejecutivo $ejecutivo) {
+    public function agregarEjecutivo(Ejecutivo $ejecutivo) {
         $conexion = new ConexionPDO();             
         try {                  
             
@@ -67,16 +61,12 @@ class EjecutivoDaoImplementado implements EjecutivoDAO {
                        
         } catch (Exception $exc) {            
             echo $exc->getMessage();
-            $resultado = false;
-        } finally {
-            return $resultado;
         }  
     }
 
     public function modificarEjecutivo(Ejecutivo $ejecutivo) {
         $conexion = new ConexionPDO();             
-        try {                  
-            
+        try{            
             $apaterno_ejecutivo = trim($ejecutivo->getApellido_paterno());            
             $amaterno_ejecutivo = trim($ejecutivo->getApellido_materno());            
             $nombre_ejecutivo = trim($ejecutivo->getNombre());            
@@ -90,36 +80,35 @@ class EjecutivoDaoImplementado implements EjecutivoDAO {
             $statement->bindValue(3, $apaterno_ejecutivo);
             $statement->bindValue(4, $amaterno_ejecutivo);
             $statement->bindValue(5, $id_ejecutivo);
-            $resultado = $statement->execute();             
-                       
-        } catch (Exception $exc) {            
-            echo $exc->getMessage();
-            $resultado = false;
-        } finally {
-            return $resultado;
-        }
-    }
-    public function ingresarPostulante($id_postulante, $pass) {
-        $conexion = new ConexionPDO();
-             
-        try {                  
-            
-            $n_id_ejecutivo = trim($id_postulante);           
-            $n_pass= trim($pass);
-            $query = "SELECT * FROM ejecutivo WHERE rut = '$n_id_ejecutivo' and contraseña='$n_pass'";
-            $statement = $conexion->query($query);                        
-            if($statement != false){
-                $row = $statement->fetchObject();            
-                return array(true, $row);
+            $statement->execute();             
+            if($statement->rowCount()>0){
+                return true;
             }else{
                 return false;
-            }
-            $resultado = $statement->fetch();                       
+            }                       
         } catch (Exception $exc) {            
             echo $exc->getMessage();
-            $resultado = false;
-            return false;
-            
+        }
+    }
+    
+    public function ingresarEjecutivo($id_ejecutivo, $pass) {
+        $conexion = new ConexionPDO();             
+        try {            
+            $n_id = trim($id_ejecutivo);           
+            $n_pass = trim($pass);     
+            $query = "SELECT rut, nombre FROM postulante WHERE rut = :rut and contraseña=:pass ";
+            $statement = $conexion->prepare($query);
+            $statement->bindParam(':rut', $n_id);
+            $statement->bindParam(':pass', $n_pass);
+            $statement->execute();
+            $resultados = $statement->fetch(PDO::FETCH_ASSOC);            
+            if($statement->rowCount()>0){
+                return array(true, $resultados) ;
+            }else{
+                return false;
+            }                      
+        } catch (Exception $exc) {            
+            echo $exc->getMessage();
         }
     }
     

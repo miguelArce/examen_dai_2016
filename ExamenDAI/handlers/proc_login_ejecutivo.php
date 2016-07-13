@@ -4,9 +4,9 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
     
     session_start();    
     include ('../dao/ejecutivodaoimplementado.php'); 
-    $ejecutivo = new \dao\EjecutivoDaoImplementado();   
+    $ejecutivo = new EjecutivoDaoImplementado();   
     
-    list($check, $data) = $ejecutivo->ingresarPostulante($_POST['rut'], $_POST['pass']);
+    list($check, $data) = $ejecutivo->ingresarEjecutivo($_POST['rut'], $_POST['pass']);
     
     if($check){        
         $_SESSION['rut'] = $data->rut;

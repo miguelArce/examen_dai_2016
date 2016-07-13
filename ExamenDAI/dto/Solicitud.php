@@ -1,16 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of Postulacion
- *
- * @author sebpa
- */
 class Solicitud {
     private $id_solicitud;
     private $postulante;
@@ -27,14 +16,23 @@ class Solicitud {
     private $nivel_educacional;
     private $experiencia_laboral;
     
-    function __construct($id_solicitud, $postulante, $modalidad, $curso, $fecha_solicitud, $estado) {
+    function __construct($id_solicitud="", $postulante="", $modalidad="", $curso="", $fecha_solicitud="", $estado="", $f_nacimiento="", $sexo="", $fono="", $e_mail="", $direccion="", $comuna="", $nivel_educacional="", $experiencia_laboral="") {
         $this->id_solicitud = $id_solicitud;
         $this->postulante = $postulante;
         $this->modalidad = $modalidad;
         $this->curso = $curso;
         $this->fecha_solicitud = $fecha_solicitud;
         $this->estado = $estado;
+        $this->f_nacimiento = $f_nacimiento;
+        $this->sexo = $sexo;
+        $this->fono = $fono;
+        $this->e_mail = $e_mail;
+        $this->direccion = $direccion;
+        $this->comuna = $comuna;
+        $this->nivel_educacional = $nivel_educacional;
+        $this->experiencia_laboral = $experiencia_laboral;
     }
+
     
     function getId_solicitud() {
         return $this->id_solicitud;

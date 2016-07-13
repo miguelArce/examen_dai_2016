@@ -14,9 +14,7 @@ include ('includes/header.php');
     <button class="" type="submit">Consultar</button>
 </form>
 
-
 <?php
-
 
 include ('includes/footer.php');
     

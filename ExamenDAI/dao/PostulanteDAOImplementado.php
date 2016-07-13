@@ -3,12 +3,8 @@
 include '../dto/postulante.php';
 include 'postulantedao.php';
 include '../sql/ConexionPDO.php';
-/**
- * Description of PostulanteDAOImplementado
- *
- * @author sebpa
- */
-class PostulanteDAOImplementado implements PostulanteDAO  {
+
+class PostulanteDAOImplementado  {
     
     public function validarRut($rut_ingresado) {        
         $expression = '/^(\d{1,9})-((\d|k|K){1})$/';
@@ -89,12 +85,12 @@ class PostulanteDAOImplementado implements PostulanteDAO  {
              
         try {            
             
-            $n_id_ejecutivo = trim($id_postulante);           
+            $n_id = trim($id_postulante);           
             $n_pass = trim($pass);     
             
             $query = "SELECT rut, nombre FROM postulante WHERE rut = :rut and contraseña=:pass ";
             $statement = $conexion->prepare($query);
-            $statement->bindParam(':rut', $n_id_ejecutivo);
+            $statement->bindParam(':rut', $n_id);
             $statement->bindParam(':pass', $n_pass);
             $statement->execute();
             $resultados = $statement->fetch(PDO::FETCH_ASSOC);
@@ -104,8 +100,6 @@ class PostulanteDAOImplementado implements PostulanteDAO  {
             }else{
                 return false;
             }
-        
-            
         } catch (Exception $exc) {            
             echo $exc->getMessage(); //mensaje para debugging
             return false;

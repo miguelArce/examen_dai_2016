@@ -4,14 +4,13 @@
 <html >
   <head>
     <meta charset="UTF-8">
-    <title>Ingreso</title><link rel="stylesheet" href="css/reset.css">
+    <title>Ingreso</title>
+    <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
   </head>
-
   <body>
-
   <div class="container">
-  <div class="login">
+  <div id="login_usuario" class="login">
   	<h1 class="login-heading">
       <strong>Bienvenido</strong>, ingrese sus datos.</h1>
       <form method="post" action="../handlers/proc_login_postulante.php">

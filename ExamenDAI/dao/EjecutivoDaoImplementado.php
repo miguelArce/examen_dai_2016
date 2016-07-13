@@ -96,7 +96,7 @@ class EjecutivoDaoImplementado {
         try {            
             $n_id = trim($id_ejecutivo);           
             $n_pass = trim($pass);     
-            $query = "SELECT rut, nombre FROM postulante WHERE rut = :rut and contraseña=:pass ";
+            $query = "SELECT rut, nombre FROM ejecutivo WHERE rut = :rut and contraseña=:pass ";
             $statement = $conexion->prepare($query);
             $statement->bindParam(':rut', $n_id);
             $statement->bindParam(':pass', $n_pass);

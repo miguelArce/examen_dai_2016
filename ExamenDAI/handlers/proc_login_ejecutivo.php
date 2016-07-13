@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
         header ('Location: formulario');
         
     }else{
-        
-        $errores = $data;
+        echo "Error en datos de login.<br>";
+        echo "<a href='../paginas/login.php'>Volver</a>";
     }
 }
